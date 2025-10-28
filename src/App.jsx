@@ -1,13 +1,7 @@
 import ReactPaginate from "react-paginate";
 import axios from "axios";
 import { useEffect, useState } from "react";
-import ProductItem from "./components/ProductItem/ProductItem";
-
-import Button from "@mui/material/Button";
-import Card from "@mui/material/Card";
-import CardContent from "@mui/material/CardContent";
-import Typography from "@mui/material/Typography";
-import { ButtonBase } from "@mui/material";
+import ProductItem from "./ProductItem/ProductItem";
 
 export default function App() {
   const [products, setProducts] = useState([]);
