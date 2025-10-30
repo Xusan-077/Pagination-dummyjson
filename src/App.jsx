@@ -8,9 +8,9 @@ export default function App() {
   const [isLoading, setIsLoading] = useState(false);
   const [page, setPage] = useState(0);
 
-  const [allPage, setAllPage] = useState(0);
+  const [totalPage, setTotalPage] = useState(0);
 
-  const limit = 10;
+  let [limit, setLimit] = useState(10);
 
   async function getProducts() {
     try {
@@ -24,7 +24,7 @@ export default function App() {
 
       console.log(res.data);
 
-      setAllPage(res.data.total);
+      setTotalPage(res.data.total);
 
       setIsLoading(false);
     } catch (err) {
@@ -34,11 +34,11 @@ export default function App() {
 
   useEffect(() => {
     getProducts();
-  }, [page, limit]);
+  }, [page]);
 
-  function handlePageClick({ selected }) {
-    setPage(selected);
-  }
+  // function handlePageClick({ selected }) {
+  //   setPage(selected);
+  // }
 
   return (
     <div className="min-h-screen bg-gray-50 py-5 px-5 mb-20">
@@ -56,7 +56,9 @@ export default function App() {
         </ul>
       )}
 
-      <ReactPaginate
+      {/* Pagination with Library */}
+
+      {/* <ReactPaginate
         previousLabel={"←"}
         nextLabel={"→"}
         breakLabel={"..."}
@@ -72,7 +74,34 @@ export default function App() {
         nextClassName="px-2 py-1 text-sm border rounded-md hover:bg-blue-100 
                  sm:px-3 sm:py-1.5 sm:text-base md:px-4 md:py-2"
         disabledClassName="opacity-50 cursor-not-allowed"
-      />
+      /> */}
+
+      {/* Pagination with Handle */}
+
+      <div className="flex items-center gap-10 justify-center mt-5">
+        <select onChange={(evt) => setLimit(Number(evt.target.value))}>
+          <option value="10">10</option>
+          <option value="20">20</option>
+          <option value="30">30</option>
+        </select>
+        <button
+          className={`cursor-pointer ${page === 0 ? "opacity-40" : ""} `}
+          disabled={page === 0}
+          onClick={() => setPage(page - 1)}
+        >
+          prev
+        </button>
+        {page + 1}/{Math.ceil(totalPage / limit)}
+        <button
+          className={`cursor-pointer ${
+            page + 1 === Math.ceil(totalPage / limit) ? "opacity-40" : ""
+          } `}
+          disabled={page + 1 === Math.ceil(totalPage / limit)}
+          onClick={() => setPage(page + 1)}
+        >
+          next
+        </button>
+      </div>
     </div>
   );
 }

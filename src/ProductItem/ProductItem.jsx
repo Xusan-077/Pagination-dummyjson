@@ -34,7 +34,7 @@ export default function ProductItem({
         <h3 className="text-base font-semibold text-gray-900 mb-1 line-clamp-1">
           {title}
         </h3>
-        <p className="text-gray-500 text-sm mb-3 line-clamp-2">{description}</p>
+        <p className="text-gray-500 text-sm mb-3 line-clamp-1">{description}</p>
 
         <div className="flex justify-between items-center mb-2">
           <span className="text-lg font-bold text-blue-600">${price}</span>
@@ -48,7 +48,7 @@ export default function ProductItem({
           <span
             className={`font-medium ${
               availabilityStatus === "In Stock"
-                ? "text-green-600"
+                ? "text-green-500"
                 : "text-red-500"
             }`}
           >
